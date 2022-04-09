@@ -1,28 +1,31 @@
-from tkinter.tix import DisplayStyle
 import requests
 from bs4 import BeautifulSoup
 
+class courseFields:
+    sections=[]
+    def __init__(self):
+        pass
 
-def fieldGetter(courseID):
-    url = 'https://api.umd.io/v1/courses/sections?course_id='+courseID
-    sections = requests.get(url).json()
-    return sections
+    def fieldGetter(self, courseID):
+        url = 'https://api.umd.io/v1/courses/sections?course_id='+courseID
+        r = requests.get(url).json()
+        self.sections = r
 
-def profGetter(courseID):
-    sections = fieldGetter(courseID)
-    instructors = set()
-    for i in sections:
-        instructors.add(i['instructors'][0])
-    return instructors
+    def profGetter(self):
+        instructors = set()
+        for i in self.sections:
+            instructors.add(i['instructors'][0])
+        return instructors
 
-# def timeGetter(__self__):
-#     timeslots = {}
-#     for i in sections:
-#         timeslots['class'] = {}
-#         meetings = i['meetings']
+    # def timeGetter(__self__):
+    #     timeslots = {}
+    #     for i in sections:
+    #         timeslots['class'] = {}
+    #         meetings = i['meetings']
 
-#         if len(meetings) == 1:
-#             for j in i['meetings'][0]:
+    #         if len(meetings) == 1:
+    #             for j in i['meetings'][0]:
 
-print(profGetter('CMSC131'))
-
+fields420 = courseFields()
+fields420.fieldGetter('CMSC420')
+print(fields420.profGetter())
