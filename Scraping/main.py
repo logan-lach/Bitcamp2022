@@ -1,10 +1,39 @@
 from .planetterp_data import *
 
+rmp_data = pickle.load(open("rmp_object.obj", "rb" ))
+
 def rank_prof_per_class(courseID, courseNumber):
 
+    available_profs = []
+    for item in courses(courseID):
+        if courseNumber == item['course_number']:
+            available_profs = item['professors']
+            break
+
+    values = []
+    for prof in available_profs:
+        prof_rmp_rating = rmp_data.SearchProfessor(prof)
+        prof_pt_rating = professor(prof, ratings=True)
+        total_reviews = prof_rmp_rating['tNumRatings'] + len(prof_pt_rating['ratings'])
+        value = ((prof_rmp_rating['overall_rating'] - 3.0) * (prof_rmp_rating['tNumRatings']/total_reviews) + (prof_pt_rating['average_rating']-3.0) * (len(prof_pt_rating['ratings'])/total_reviews))
+        values.append(value, prof)
+
+    return sorted(values)
 
 
-def rank_classes_per_dept(deptID, requirements=None, amount):
+
+
+
+def rank_classes_per_dept(deptID):
+
+    classes = []
+    seen_profs = set()
+    for elem in requirements:
+        classes.append(deptID, elem)[0]
+
+    if len(classes) != amount:
+
+
 
     all_courses = courses(deptID)
 
