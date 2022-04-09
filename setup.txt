@@ -1,0 +1,20 @@
+
+
+To insure we all have the same packages, create a virtual enviornment inside of the Bitcamp2022 directory with the following command
+
+mkdir venv
+cd venv
+python3 -m venv .
+
+From there, activate the virtual enviornment (While in the venv directory) with this command
+
+source bin/activate
+
+Afterward, go back to the main Bitcamp file. There you will find a requirements.txt file. Perform the following command
+
+pip install -r requirements.txt
+
+
+This will ensure we all have the same packages and versions moving forward
+
+
