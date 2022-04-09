@@ -13,8 +13,10 @@ DO NOT RUN THIS RIGHT AWAY.
 
 WE HAVE A PICKLED OBJECT THAT WE WILL USE TO REFERENCE RATEMYPROFESSOR DATA! USE THAT!
 
-ONLY RUN THIS TO UPDATE THE 
+ONLY RUN THIS TO UPDATE THE INFO
+
 """
+
 class RateMyProfScraper:
         def __init__(self,schoolid):
             self.UniversityId = schoolid
