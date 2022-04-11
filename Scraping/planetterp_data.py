@@ -140,6 +140,6 @@ def grades(course = None, professor = None, semester = None, section = None):
     return requests.get(url).json()
 
 
-print(professor("Justin Wyss-Gallifent", reviews=True))
+print(courses("CMSC"))
 
 

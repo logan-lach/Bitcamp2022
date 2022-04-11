@@ -1,11 +1,12 @@
 from .planetterp_data import *
+from .testudo import profGetter
 
 rmp_data = pickle.load(open("rmp_object.obj", "rb" ))
 
-def rank_prof_per_class(courseID, courseNumber):
+def rank_prof_per_class(courseID):
 
     available_profs = []
-    for item in courses(courseID):
+    for item in profGetter(courseID):
         if courseNumber == item['course_number']:
             available_profs = item['professors']
             break
@@ -16,7 +17,7 @@ def rank_prof_per_class(courseID, courseNumber):
         prof_pt_rating = professor(prof, ratings=True)
         total_reviews = prof_rmp_rating['tNumRatings'] + len(prof_pt_rating['ratings'])
         value = ((prof_rmp_rating['overall_rating'] - 3.0) * (prof_rmp_rating['tNumRatings']/total_reviews) + (prof_pt_rating['average_rating']-3.0) * (len(prof_pt_rating['ratings'])/total_reviews))
-        values.append(value, prof)
+        values.append((value, prof))
 
     return sorted(values)
 
@@ -26,12 +27,15 @@ def rank_prof_per_class(courseID, courseNumber):
 
 def rank_classes_per_dept(deptID):
 
-    classes = []
-    seen_profs = set()
-    for elem in requirements:
-        classes.append(deptID, elem)[0]
+    rankings = []
+    for item in courses(deptID):
+        ranking = rank_prof_per_class(deptID + item['course_number'])
+        rankings.append((item['course_number'], rank_prof_per_class(deptID + item['course_number'])))
 
-    if len(classes) != amount:
+
+
+
+
 
 
 
