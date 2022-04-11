@@ -1,5 +1,7 @@
-from .planetterp_data import *
-from .testudo import profGetter
+from planetterp_data import *
+from testudo import profGetter
+import pickle
+from generate_rmp_data import RateMyProfScraper
 
 rmp_data = pickle.load(open("rmp_object.obj", "rb" ))
 
@@ -37,9 +39,47 @@ def rank_classes_per_dept(deptID):
 
 
 
+if __name__ == "__main__":
+    """
+    Algorithm Idea:
+    
+    Read input for required classes
+    Read input for departments you'd like to take extra classes in (And how much)
+    
+    Example input:
+        Which classes are you required to take next semester?:
+            CMSC420
+            (Later, check if they are valid course codes)
+        What other classes would you like to take?
+            CMSC, 1
+            MATH, 1
+            HIST, 2
+            
+    We'll rank in given order. 
+    Let's get the best classes for our required classes now. 
+    
+    """
+
+    required = []
+    user_input = None
+    while user_input != "Done":
+        user_input = input("Enter which classes you are required to take next semester (Enter 'Done' when finished): ")
+        required.append(user_input)
+
+    required.pop()
+    extra = []
+    user_input = None
+    while True:
+        user_input = input("Enter the department you'd like to take electives in (Enter 'Done' when finished): ")
+        if user_input == "Done":
+            break
+        amt = input("Enter the amount of courses you'd like to take in this department")
+        extra.append((user_input, amt))
+
+    for r_class in required:
+        print(rank_prof_per_class(r_class))
 
 
-    all_courses = courses(deptID)
 
 
     """

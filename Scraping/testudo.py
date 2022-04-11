@@ -10,6 +10,7 @@ class courseFields:
         url = 'https://api.umd.io/v1/courses/sections?course_id='+courseID
         r = requests.get(url).json()
         self.sections = r
+        return r
 
     def profGetter(self):
         instructors = set()
@@ -27,5 +28,5 @@ class courseFields:
     #             for j in i['meetings'][0]:
 
 fields420 = courseFields()
-fields420.fieldGetter('CMSC420')
+print(fields420.fieldGetter('CMSC420'))
 print(fields420.profGetter())

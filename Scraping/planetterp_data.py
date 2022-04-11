@@ -139,7 +139,3 @@ def grades(course = None, professor = None, semester = None, section = None):
 
     return requests.get(url).json()
 
-
-print(courses("CMSC"))
-
-
